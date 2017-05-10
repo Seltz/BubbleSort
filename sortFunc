@@ -1,0 +1,51 @@
+import Foundation
+func swap(numbers: Int) {  
+  var arrayOfNumbers: [Int] = [] 
+  let numberString = String(numbers)  
+  
+  for each in numberString.characters {  
+    if let newNumber = Int(String(each)) {   
+      arrayOfNumbers.append(newNumber)  
+    } 
+    }  
+    
+    var numberOfSwaps = 0 
+    var current = 0 
+    var count = arrayOfNumbers.count - 1 
+    var firstCount = arrayOfNumbers.count - 1 
+    var temp = 0  while firstCount > 0 {  
+      while count > 0 {      
+        var stringArray = arrayOfNumbers.map { String($0) }       
+        
+        func addParens() {    
+          stringArray.insert("(", at: current)    
+          stringArray.insert(")", at: current + 3)   
+        }    func removeParens() {    
+          stringArray.remove(at: current)    
+          stringArray.remove(at: current + 2)   
+        }      
+        
+        if arrayOfNumbers[current] > arrayOfNumbers[current + 1] {
+          temp = arrayOfNumbers[current]    
+          arrayOfNumbers[current] = arrayOfNumbers[current + 1]    
+          arrayOfNumbers[current + 1] = temp    
+          numberOfSwaps += 1        
+          
+          addParens()    
+          print("\(String(describing: stringArray)) - swapped")    
+          removeParens()       
+       } else {        
+          addParens()   
+          print("\(String(describing: stringArray)) - passed")    
+          removeParens()   
+       }   
+       current += 1   
+       count -= 1  
+    }  
+    count = arrayOfNumbers.count - 1 
+    current = 0  
+    firstCount -= 1 
+ } 
+ print("\(numberOfSwaps) swaps, \(arrayOfNumbers)")
+ }
+swap(numbers: 987654321)
